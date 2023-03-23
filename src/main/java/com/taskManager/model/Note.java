@@ -31,6 +31,6 @@ public class Note implements Serializable {
     private String description;
     private Date date;
     private Priority priority;
-
     private Situation situation;
+
 }
