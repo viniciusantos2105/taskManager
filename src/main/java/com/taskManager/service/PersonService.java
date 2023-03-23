@@ -30,6 +30,8 @@ public class PersonService implements UserDetailsService {
     @Autowired
     private PersonRepository repository;
 
+    @Autowired
+    private JwtTokenProvider tokenProvider;
 
     public Person registry(PersonDTO personDTO){
         if(findByName(personDTO.getUsername())){
@@ -44,15 +46,7 @@ public class PersonService implements UserDetailsService {
         return repository.save(person);
     }
 
-    @Autowired
-    private JwtTokenProvider tokenProvider;
-
-
     public TokenDTO loginToken(LoginDTO login){
-//        if(findByName(login.getUsername())){
-//            Person person = repository.findByUsername(login.getUsername()).get();
-//
-//        }
         Person person = Person.builder().username(login.getUsername())
                 .password(login.getPassword()).build();
         UserDetails userLogin = authentic(person);
