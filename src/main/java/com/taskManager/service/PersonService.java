@@ -3,12 +3,17 @@ package com.taskManager.service;
 import com.taskManager.dto.LoginDTO;
 import com.taskManager.dto.PersonDTO;
 import com.taskManager.dto.TokenDTO;
+import com.taskManager.exception.EmailAlreadyExistsException;
+import com.taskManager.exception.PersonNotFoundException;
+import com.taskManager.exception.UsernameInUseException;
+import com.taskManager.exception.WrongPasswordException;
 import com.taskManager.model.Person;
 import com.taskManager.repository.PersonRepository;
 import com.taskManager.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,10 +40,22 @@ public class PersonService implements UserDetailsService {
 
     public Person registry(Person person){
         if(findByName(person.getUsername())){
-           throw new RuntimeException("Nome de usuario indisponivel");
+           throw new UsernameInUseException();
+        }
+        if(findByEmail(person.getEmail())){
+            throw new EmailAlreadyExistsException();
         }
         person.setNoteList(new ArrayList<>());
         return repository.save(person);
+    }
+
+    public Person updateEmail(PersonDTO personDTO){
+        Person person = repository.findById(personDTO.getId()).orElseThrow(PersonNotFoundException::new);
+
+    }
+
+    public void delete(Long id){
+        repository.deleteById(id);
     }
 
     public Person encoderPassword(Person person){
@@ -60,7 +77,7 @@ public class PersonService implements UserDetailsService {
         if(passwordEquals){
             return usuario;
         }
-        throw new RuntimeException("Senha inválida");
+        throw new WrongPasswordException();
     }
 
     @Override
@@ -75,4 +92,6 @@ public class PersonService implements UserDetailsService {
     public boolean findByName(String username){
         return repository.findByUsername(username).isPresent();
     }
+
+    public boolean findByEmail(String email) { return repository.findByEmail(email).isPresent();}
 }

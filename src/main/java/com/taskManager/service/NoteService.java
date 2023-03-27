@@ -1,6 +1,7 @@
 package com.taskManager.service;
 
 import com.taskManager.dto.NoteDTO;
+import com.taskManager.exception.InvalidDateException;
 import com.taskManager.model.Note;
 import com.taskManager.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,6 @@ public class NoteService {
         else if(day <= dayAcutal && month <= monthActual && year > yearActual){
             return new Date(date);
         }
-        throw new RuntimeException("Data inválida");
+        throw new InvalidDateException();
     }
 }

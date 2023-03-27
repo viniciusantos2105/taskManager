@@ -1,10 +1,13 @@
 package com.taskManager.service;
 
+import com.taskManager.dto.LoginDTO;
 import com.taskManager.dto.PersonDTO;
+import com.taskManager.dto.TokenDTO;
 import com.taskManager.mock.MockPerson;
 import com.taskManager.model.Person;
 import com.taskManager.repository.PersonRepository;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -65,6 +68,7 @@ public class PersonServiceTest {
         assertEquals("Password test1", result.getPassword());
         assertEquals(0, result.getNoteList().size());
     }
+
 
 
 }

@@ -1,5 +1,6 @@
 package com.taskManager.mock;
 
+import com.taskManager.dto.LoginDTO;
 import com.taskManager.dto.PersonDTO;
 import com.taskManager.model.Person;
 
@@ -14,6 +15,7 @@ public class MockPerson {
     public PersonDTO mockEntityDTO() {
         return mockEntityDTO(1);
     }
+
 
     public Person mockEntity(Integer number) {
         Person person = new Person();
@@ -33,4 +35,6 @@ public class MockPerson {
         person.setPassword("Password test" + number);
         return person;
     }
+
+
 }
