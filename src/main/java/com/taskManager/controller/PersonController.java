@@ -19,8 +19,9 @@ public class PersonController {
     private PersonService service;
 
     @PostMapping("/registry")
-    public Person registry(@RequestBody PersonDTO personDTO){
-        return service.registry(personDTO);
+    public Person registry(@RequestBody Person personDTO){
+        Person person = service.registry(personDTO);
+        return service.encoderPassword(person);
     }
 
     @PostMapping("/login")

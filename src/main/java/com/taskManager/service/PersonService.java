@@ -33,16 +33,17 @@ public class PersonService implements UserDetailsService {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
-    public Person registry(PersonDTO personDTO){
-        if(findByName(personDTO.getUsername())){
-            throw new RuntimeException("Nome de usuario indisponivel");
+    public Person registry(Person person){
+        if(findByName(person.getUsername())){
+           throw new RuntimeException("Nome de usuario indisponivel");
         }
-        Person person = new Person();
-        person.setName(personDTO.getName());
-        person.setEmail(personDTO.getEmail());
-        person.setUsername(personDTO.getUsername());
-        person.setPassword(passwordEncoder().encode(personDTO.getPassword()));
         person.setNoteList(new ArrayList<>());
+        return repository.save(person);
+    }
+
+    public Person encoderPassword(Person person){
+        String password = passwordEncoder().encode(person.getPassword());
+        person.setPassword(password);
         return repository.save(person);
     }
 
