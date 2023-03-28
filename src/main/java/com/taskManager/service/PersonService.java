@@ -39,7 +39,7 @@ public class PersonService implements UserDetailsService {
     private JwtTokenProvider tokenProvider;
 
     public Person registry(Person person){
-        if(findByName(person.getUsername())){
+        if(findByUsername(person.getUsername())){
            throw new UsernameInUseException();
         }
         if(findByEmail(person.getEmail())){
@@ -49,13 +49,27 @@ public class PersonService implements UserDetailsService {
         return repository.save(person);
     }
 
+    public Person updateUsername(PersonDTO personDTO){
+        Person person = repository.findById(personDTO.getId()).orElseThrow(PersonNotFoundException::new);
+        if(findByUsername(personDTO.getUsername())){
+            throw new UsernameInUseException();
+        }
+        person.setUsername(personDTO.getUsername());
+        return repository.save(person);
+    }
+
     public Person updateEmail(PersonDTO personDTO){
         Person person = repository.findById(personDTO.getId()).orElseThrow(PersonNotFoundException::new);
-
+        if(findByEmail(person.getEmail())){
+            throw new EmailAlreadyExistsException();
+        }
+        person.setEmail(personDTO.getEmail());
+        return repository.save(person);
     }
 
     public void delete(Long id){
-        repository.deleteById(id);
+        Person person = repository.findById(id).orElseThrow(PersonNotFoundException::new);
+        repository.delete(person);
     }
 
     public Person encoderPassword(Person person){
@@ -89,7 +103,7 @@ public class PersonService implements UserDetailsService {
         return User.builder().username(person.getUsername()).password(person.getPassword()).roles().build();
     }
 
-    public boolean findByName(String username){
+    public boolean findByUsername(String username){
         return repository.findByUsername(username).isPresent();
     }
 
