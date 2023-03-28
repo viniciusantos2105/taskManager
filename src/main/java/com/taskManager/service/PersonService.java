@@ -60,11 +60,17 @@ public class PersonService implements UserDetailsService {
 
     public Person updateEmail(PersonDTO personDTO){
         Person person = repository.findById(personDTO.getId()).orElseThrow(PersonNotFoundException::new);
-        if(findByEmail(person.getEmail())){
+        if(findByEmail(personDTO.getEmail())){
             throw new EmailAlreadyExistsException();
         }
         person.setEmail(personDTO.getEmail());
         return repository.save(person);
+    }
+
+    public Person updatePassword(PersonDTO personDTO){
+        Person person = repository.findById(personDTO.getId()).orElseThrow(PersonNotFoundException::new);
+        person.setPassword(personDTO.getPassword());
+        return encoderPassword(person);
     }
 
     public void delete(Long id){

@@ -26,6 +26,19 @@ public class PersonController {
         return service.loginToken(loginDTO);
     }
 
+    @PatchMapping("/update/username")
+    public Person updateUsername(@RequestBody PersonDTO personDTO){
+        return service.updateUsername(personDTO);
+    }
+
+    @PatchMapping("/update/email")
+    public Person updateEmail(@RequestBody PersonDTO personDTO){
+        return service.updateEmail(personDTO);
+    }
+
+    @PatchMapping("/update/password")
+    public Person updatePassword(@RequestBody PersonDTO personDTO){ return service.updateEmail(personDTO); }
+
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id){
         service.delete(id);
