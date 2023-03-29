@@ -49,6 +49,10 @@ public class PersonService implements UserDetailsService {
         return repository.save(person);
     }
 
+    public Person findById(Long id){
+        return repository.findById(id).orElseThrow(PersonNotFoundException::new);
+    }
+
     public Person updateUsername(PersonDTO personDTO){
         Person person = repository.findById(personDTO.getId()).orElseThrow(PersonNotFoundException::new);
         if(findByUsername(personDTO.getUsername())){

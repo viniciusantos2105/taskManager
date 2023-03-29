@@ -5,6 +5,9 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.taskManager.dto.TokenDTO;
+import com.taskManager.exception.TokenInvalidException;
+import com.taskManager.model.Person;
+import com.taskManager.service.PersonService;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,9 @@ public class JwtTokenProvider {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private PersonService personService;
 
     Algorithm algorithm = null;
 
@@ -87,6 +93,15 @@ public class JwtTokenProvider {
         UserDetails userDetails = this.userDetailsService
                 .loadUserByUsername(decodedJWT.getSubject());
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }
+
+    public void validate(String token, Long id){
+        DecodedJWT decodedJWT = decodedToken(token);
+        UserDetails userDetails = this.userDetailsService
+                .loadUserByUsername(decodedJWT.getSubject());
+
+       Person person = personService.findById(id);
+       if(!person.getUsername().equals(userDetails.getUsername())) throw new TokenInvalidException();
     }
 
     private DecodedJWT decodedToken(String token) {

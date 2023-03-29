@@ -1,9 +1,11 @@
 package com.taskManager.config;
 
+import com.taskManager.security.JwtConfigurer;
 import com.taskManager.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
@@ -25,10 +27,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeHttpRequests()
-                .anyRequest()
+                .requestMatchers("/api/persons/login", "/api/persons/registry")
                 .permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
-                .httpBasic(withDefaults());
+                .httpBasic(withDefaults())
+                .apply(new JwtConfigurer(tokenProvider));
         return http.build();
     }
 }
