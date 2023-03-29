@@ -7,9 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Priority {
 
-    MAXIMUM(1, "Máximo"),
-    MEAN(2, "Média"),
-    LOW(3, "Baixa");
+    MAXIMUM(1, "maxima"),
+    MEAN(2, "media"),
+    LOW(3, "baixa");
 
     private final int number;
     private final String description;

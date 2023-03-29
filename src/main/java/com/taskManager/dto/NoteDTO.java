@@ -15,10 +15,11 @@ import java.util.Date;
 @AllArgsConstructor
 public class NoteDTO {
 
+    private Long id;
 
     private String title;
     private String description;
     private String date;
     private String priority;
-
+    private String situation;
 }
