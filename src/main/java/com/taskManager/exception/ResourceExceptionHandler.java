@@ -34,4 +34,10 @@ public class ResourceExceptionHandler {
         StandardError error = new StandardError(LocalDateTime.now(), HttpStatus.UNAUTHORIZED.value(), ex.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
+
+    @ExceptionHandler(TokenInvalidException.class)
+    public ResponseEntity<StandardError> emailAlreadyExistsException(TokenInvalidException ex, HttpServletRequest request){
+        StandardError error = new StandardError(LocalDateTime.now(), HttpStatus.UNAUTHORIZED.value(), ex.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+    }
 }
