@@ -9,6 +9,8 @@ import com.taskManager.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/note")
 public class NoteController {
@@ -35,5 +37,11 @@ public class NoteController {
     public Note updateNoteSituation(@RequestBody NoteDTO noteDTO, @RequestHeader("Authorization") String token){
         provider.validate(token.substring(7), noteDTO.getId());
         return service.updateNoteSituation(noteDTO);
+    }
+
+    @GetMapping("/list/{id}")
+    public List<Note> findAll(@PathVariable Long id,@RequestHeader("Authorization") String token){
+        provider.validate(token.substring(7), id);
+        return service.findAll(id);
     }
 }

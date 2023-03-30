@@ -4,14 +4,17 @@ import com.taskManager.dto.NoteDTO;
 import com.taskManager.enums.Priority;
 import com.taskManager.enums.Situation;
 import com.taskManager.exception.InvalidDateException;
+import com.taskManager.exception.PersonNotFoundException;
 import com.taskManager.model.Note;
 import com.taskManager.model.Person;
 import com.taskManager.repository.NoteRepository;
+import com.taskManager.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class NoteService {
@@ -21,6 +24,9 @@ public class NoteService {
 
     @Autowired
     private NoteRepository repository;
+
+    @Autowired
+    private PersonRepository personRepository;
 
     public Note createNote(NoteDTO noteDTO){
         Person person = personService.findById(noteDTO.getId());
@@ -53,6 +59,11 @@ public class NoteService {
             return repository.save(note);
         }
         return note;
+    }
+
+    public List<Note> findAll(Long id){
+        Person person = personService.findById(id);
+        return person.getNoteList();
     }
 
     public Priority selectPriority(String priorityString){
