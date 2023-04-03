@@ -1,4 +1,4 @@
-package com.taskManager.service;
+package com.taskManager.unittests.service;
 
 import com.taskManager.dto.NoteDTO;
 import com.taskManager.enums.Priority;
@@ -9,6 +9,8 @@ import com.taskManager.model.Note;
 import com.taskManager.model.Person;
 import com.taskManager.repository.NoteRepository;
 import com.taskManager.repository.PersonRepository;
+import com.taskManager.service.NoteService;
+import com.taskManager.service.PersonService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

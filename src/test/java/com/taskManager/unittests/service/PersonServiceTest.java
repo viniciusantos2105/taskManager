@@ -1,4 +1,4 @@
-package com.taskManager.service;
+package com.taskManager.unittests.service;
 
 import com.taskManager.dto.LoginDTO;
 import com.taskManager.dto.PersonDTO;
@@ -6,6 +6,7 @@ import com.taskManager.dto.TokenDTO;
 import com.taskManager.mock.MockPerson;
 import com.taskManager.model.Person;
 import com.taskManager.repository.PersonRepository;
+import com.taskManager.service.PersonService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
