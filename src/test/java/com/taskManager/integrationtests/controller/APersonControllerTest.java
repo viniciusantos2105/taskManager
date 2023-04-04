@@ -10,18 +10,13 @@ import com.taskManager.integrationtests.dto.LoginDTO;
 import com.taskManager.integrationtests.dto.PersonDTO;
 import com.taskManager.integrationtests.dto.TokenDTO;
 import com.taskManager.integrationtests.testcontainers.AbstractIntegrationTest;
-import com.taskManager.model.Person;
-import com.taskManager.repository.PersonRepository;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.ArrayList;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,7 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class PersonControllerTest extends AbstractIntegrationTest {
+@Order(0)
+public class APersonControllerTest extends AbstractIntegrationTest {
 
 
     private static RequestSpecification specification;

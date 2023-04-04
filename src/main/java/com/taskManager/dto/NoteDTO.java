@@ -17,6 +17,7 @@ public class NoteDTO {
 
     private Long id;
 
+    private Long personId;
     private String title;
     private String description;
     private String date;

@@ -29,7 +29,7 @@ public class NoteService {
     private PersonRepository personRepository;
 
     public Note createNote(NoteDTO noteDTO){
-        Person person = personService.findById(noteDTO.getId());
+        Person person = personService.findById(noteDTO.getPersonId());
 
         String date = validateDate(noteDTO.getDate());
         Note note = new Note();

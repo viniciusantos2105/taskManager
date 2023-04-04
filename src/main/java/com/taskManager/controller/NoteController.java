@@ -23,19 +23,19 @@ public class NoteController {
 
     @PostMapping("/create")
     public Note registry(@RequestBody NoteDTO noteDTO, @RequestHeader("Authorization") String token){
-        provider.validate(token.substring(7), noteDTO.getId());
+        provider.validate(token.substring(7), noteDTO.getPersonId());
         return service.createNote(noteDTO);
     }
 
-    @PatchMapping("/update/note/priority")
+    @PatchMapping("/update/priority")
     public Note updateNotePriotiry(@RequestBody NoteDTO noteDTO, @RequestHeader("Authorization") String token){
-        provider.validate(token.substring(7), noteDTO.getId());
+        provider.validate(token.substring(7), noteDTO.getPersonId());
         return service.updateNotePriotiry(noteDTO);
     }
 
-    @PatchMapping("/update/note/situation")
+    @PatchMapping("/update/situation")
     public Note updateNoteSituation(@RequestBody NoteDTO noteDTO, @RequestHeader("Authorization") String token){
-        provider.validate(token.substring(7), noteDTO.getId());
+        provider.validate(token.substring(7), noteDTO.getPersonId());
         return service.updateNoteSituation(noteDTO);
     }
 
