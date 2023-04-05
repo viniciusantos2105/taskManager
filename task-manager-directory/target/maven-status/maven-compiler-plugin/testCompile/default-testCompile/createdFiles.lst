@@ -1,0 +1,12 @@
+com\taskManager\mock\MockPerson.class
+com\taskManager\integrationtests\dto\PersonDTO.class
+com\taskManager\integrationtests\testcontainers\AbstractIntegrationTest.class
+com\taskManager\configs\TestConfigs.class
+com\taskManager\integrationtests\dto\LoginDTO.class
+com\taskManager\integrationtests\controller\NoteControllerTest.class
+com\taskManager\unittests\service\PersonServiceTest.class
+com\taskManager\integrationtests\testcontainers\AbstractIntegrationTest$Initializer.class
+com\taskManager\integrationtests\controller\APersonControllerTest.class
+com\taskManager\mock\MockNote.class
+com\taskManager\unittests\service\NoteServiceTest.class
+com\taskManager\integrationtests\dto\TokenDTO.class
