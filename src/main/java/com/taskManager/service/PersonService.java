@@ -12,8 +12,6 @@ import com.taskManager.repository.PersonRepository;
 import com.taskManager.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class PersonService implements UserDetailsService {
@@ -111,6 +110,10 @@ public class PersonService implements UserDetailsService {
         String[] roles = new String[]{"USER"};
 
         return User.builder().username(person.getUsername()).password(person.getPassword()).roles().build();
+    }
+
+    public Optional<Person> findByUsernameOptional(String username){
+        return repository.findByUsername(username);
     }
 
     public boolean findByUsername(String username){

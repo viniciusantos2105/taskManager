@@ -4,6 +4,7 @@ import com.taskManager.dto.NoteDTO;
 import com.taskManager.enums.Priority;
 import com.taskManager.enums.Situation;
 import com.taskManager.exception.InvalidDateException;
+import com.taskManager.exception.NoteNotFoundException;
 import com.taskManager.exception.PersonNotFoundException;
 import com.taskManager.model.Note;
 import com.taskManager.model.Person;
@@ -58,7 +59,31 @@ public class NoteService {
             note.setSituation(Situation.DONE);
             return repository.save(note);
         }
+        if(noteDTO.getSituation().equals("em aberto")){
+            note.setSituation(Situation.OPENED);
+            return repository.save(note);
+        }
         return note;
+    }
+
+    public Note findById(Long idPerson, Long idNote){
+        Person person = personService.findById(idPerson);
+        Note note = repository.findById(idNote).orElseThrow(NoteNotFoundException::new);
+        int i = person.getNoteList().size();
+        i--;
+        if(person.getNoteList().isEmpty()){
+            throw new NoteNotFoundException();
+        }
+
+        for(i = i; i >= 0; i--){
+
+          Note validate = person.getNoteList().get(i);
+            if(validate.equals(note)){
+                return validate;
+            }
+        }
+
+        throw new NoteNotFoundException();
     }
 
     public List<Note> findAll(Long id){
@@ -80,9 +105,10 @@ public class NoteService {
         return null;
     }
 
-//    public Note updateNote(NoteDTO noteDTO){
-//
-//    }
+    public void deleteNote(Long idPerson, Long idNote){
+        Note note = findById(idPerson, idNote);
+        repository.delete(note);
+    }
 
     public String validateDate(String date){
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
