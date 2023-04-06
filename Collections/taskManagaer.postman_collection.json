@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "09ee5a55-f0cb-46d0-82ca-f5330c6d670f",
+		"name": "taskManagaer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(responseCode.code >= 200 && responseCode.code <= 299){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"\r",
+									"    postman.setEnvironmentVariable('accessToken', jsonData.accessToken);\r",
+									"    postman.setEnvironmentVariable('refreshToken', jsonData.refreshToken);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"vini12\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/persons/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"persons",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Person",
+			"item": [
+				{
+					"name": "Registry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/persons/v1/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"persons",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Username",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"username\": \"vinicius27\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/persons/update/username",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"persons",
+								"update",
+								"username"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Email",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"email\": \"vini12@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/persons/update/email",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"persons",
+								"update",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/persons/update/password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"persons",
+								"update",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/persons/delete/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"persons",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Note",
+			"item": [
+				{
+					"name": "Create Note",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"id\": 1,\r\n    \"title\": \"programar\",\r\n    \"description\": \"criar uma api de cinema\",\r\n    \"date\": \"05/04/2023\",\r\n    \"priority\": \"media\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/note/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"note",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Note",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/note/list/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"note",
+								"list",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Priority",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"id\": 1,\r\n    \"priority\": \"maxima\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/note/update/note/priority",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"note",
+								"update",
+								"note",
+								"priority"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Situation",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"id\": 1,\r\n    \"situation\": \"feito\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/note/update/note/situation",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"note",
+								"update",
+								"note",
+								"situation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
