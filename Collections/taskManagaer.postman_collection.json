@@ -31,7 +31,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"vini12\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"username\": \"vini14\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -64,7 +64,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n}",
+							"raw": "{\r\n    \"name\": \"vinicius\",\r\n    \"email\": \"vini12@email.com\",\r\n    \"username\": \"vini12\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -72,15 +72,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/persons/v1/1",
+							"raw": "{{baseUrl}}/api/persons/registry",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"persons",
-								"v1",
-								"1"
+								"registry"
 							]
 						}
 					},
@@ -99,7 +98,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 2,\r\n    \"username\": \"vinicius27\"\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"username\": \"vinicius27\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -134,7 +133,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"email\": \"vini12@email.com\"\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"email\": \"vini14@email.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -235,7 +234,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \r\n    \"id\": 1,\r\n    \"title\": \"programar\",\r\n    \"description\": \"criar uma api de cinema\",\r\n    \"date\": \"05/04/2023\",\r\n    \"priority\": \"media\"\r\n}",
+							"raw": "{   \r\n    \"personId\": 2,\r\n    \"title\": \"concurso\",\r\n    \"description\": \"estudar assuntos gerais\",\r\n    \"date\": \"20/04/2023\",\r\n    \"priority\": \"media\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -283,6 +282,32 @@
 					"response": []
 				},
 				{
+					"name": "Find Note By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/note/2/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"note",
+								"2",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Update Priority",
 					"request": {
 						"method": "PATCH",
@@ -303,7 +328,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/note/update/note/priority",
+							"raw": "{{baseUrl}}/api/note/update/priority",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -311,7 +336,6 @@
 								"api",
 								"note",
 								"update",
-								"note",
 								"priority"
 							]
 						}
@@ -331,7 +355,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \r\n    \"id\": 1,\r\n    \"situation\": \"feito\"\r\n}",
+							"raw": "{   \r\n    \"id\": 1,\r\n    \"personId\": 1,\r\n    \"situation\": \"em aberto\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -339,7 +363,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/note/update/note/situation",
+							"raw": "{{baseUrl}}/api/note/update/situation",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -347,8 +371,34 @@
 								"api",
 								"note",
 								"update",
-								"note",
 								"situation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Note",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/note/delete/1/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"note",
+								"delete",
+								"1",
+								"2"
 							]
 						}
 					},
