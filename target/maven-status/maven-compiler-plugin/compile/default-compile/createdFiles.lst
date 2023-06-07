@@ -1,5 +1,6 @@
 com\taskManager\model\Note.class
 com\taskManager\model\Person.class
+com\taskManager\exception\NoteNotFoundException.class
 com\taskManager\dto\TokenDTO.class
 com\taskManager\exception\EmailAlreadyExistsException.class
 com\taskManager\exception\StandardError.class
@@ -10,6 +11,7 @@ com\taskManager\exception\TokenInvalidException.class
 com\taskManager\security\JwtConfigurer.class
 com\taskManager\dto\PersonDTO.class
 com\taskManager\controller\NoteController.class
+com\taskManager\config\OpenApiConfig.class
 com\taskManager\controller\PersonController.class
 com\taskManager\repository\PersonRepository.class
 com\taskManager\dto\LoginDTO.class

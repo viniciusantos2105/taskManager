@@ -7,6 +7,7 @@ import com.taskManager.exception.EmailAlreadyExistsException;
 import com.taskManager.exception.PersonNotFoundException;
 import com.taskManager.exception.UsernameInUseException;
 import com.taskManager.exception.WrongPasswordException;
+import com.taskManager.model.Note;
 import com.taskManager.model.Person;
 import com.taskManager.repository.PersonRepository;
 import com.taskManager.security.JwtTokenProvider;
@@ -36,6 +37,13 @@ public class PersonService implements UserDetailsService {
 
     @Autowired
     private JwtTokenProvider tokenProvider;
+
+
+    public void removeNote(Long id, Note note){
+        Person person = repository.findById(id).orElseThrow(PersonNotFoundException::new);
+        person.getNoteList().remove(note);
+        repository.save(person);
+    }
 
     public Person registry(Person person){
         if(findByUsername(person.getUsername())){

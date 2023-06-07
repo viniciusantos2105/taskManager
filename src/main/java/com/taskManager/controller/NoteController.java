@@ -138,7 +138,7 @@ public class NoteController {
             }
     )
     @DeleteMapping("/delete/{idPerson}/{idNote}")
-    public void deleteNote(@PathVariable Long idPerson, Long idNote, @RequestHeader("Authorization") String token){
+    public void deleteNote(@PathVariable Long idPerson, @PathVariable Long idNote, @RequestHeader("Authorization") String token){
         provider.validate(token.substring(7), idPerson);
         service.deleteNote(idPerson, idNote);
     }

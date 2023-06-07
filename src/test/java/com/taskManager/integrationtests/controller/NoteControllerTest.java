@@ -147,7 +147,7 @@ public class NoteControllerTest extends AbstractIntegrationTest {
 
         assertEquals("Title test", persistedNote.getTitle());
         assertEquals("Note test", persistedNote.getDescription());
-        assertEquals("29/05/2023", persistedNote.getDate());
+        assertEquals("29/11/2023", persistedNote.getDate());
         assertEquals("MEAN", persistedNote.getPriority());
         assertEquals("OPENED", persistedNote.getSituation());
     }
@@ -185,7 +185,7 @@ public class NoteControllerTest extends AbstractIntegrationTest {
 
         assertEquals("Title test", persistedNote.getTitle());
         assertEquals("Note test", persistedNote.getDescription());
-        assertEquals("29/05/2023", persistedNote.getDate());
+        assertEquals("29/11/2023", persistedNote.getDate());
         assertEquals("MAXIMUM", persistedNote.getPriority());
         assertEquals("OPENED", persistedNote.getSituation());
     }
@@ -224,7 +224,7 @@ public class NoteControllerTest extends AbstractIntegrationTest {
 
         assertEquals("Title test", persistedNote.getTitle());
         assertEquals("Note test", persistedNote.getDescription());
-        assertEquals("29/05/2023", persistedNote.getDate());
+        assertEquals("29/11/2023", persistedNote.getDate());
         assertEquals("MAXIMUM", persistedNote.getPriority());
         assertEquals("DONE", persistedNote.getSituation());
     }
@@ -238,7 +238,7 @@ public class NoteControllerTest extends AbstractIntegrationTest {
 
     private void mockNote(){
         note.setPriority("media");
-        note.setDate("29/05/2023");
+        note.setDate("29/11/2023");
         note.setDescription("Note test");
         note.setTitle("Title test");
     }

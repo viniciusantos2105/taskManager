@@ -26,9 +26,6 @@ public class NoteService {
     @Autowired
     private NoteRepository repository;
 
-    @Autowired
-    private PersonRepository personRepository;
-
     public Note createNote(NoteDTO noteDTO){
         Person person = personService.findById(noteDTO.getPersonId());
 
@@ -107,6 +104,7 @@ public class NoteService {
 
     public void deleteNote(Long idPerson, Long idNote){
         Note note = findById(idPerson, idNote);
+        personService.removeNote(idPerson, note);
         repository.delete(note);
     }
 
